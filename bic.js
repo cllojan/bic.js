@@ -119,4 +119,4 @@ const text = (txt) => {
     return document.createTextNode(txt);
 }
 
-exports default init;
+export default init;
