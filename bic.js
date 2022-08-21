@@ -1,4 +1,4 @@
-export const init = (tag) => {
+const init = (tag) => {
 
     let element;
     try{
@@ -119,4 +119,4 @@ const text = (txt) => {
     return document.createTextNode(txt);
 }
 
-module.exports = {init, copmt , create, div  }
+exports.init = init
