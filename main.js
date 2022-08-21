@@ -1,4 +1,4 @@
-export default const init = (tag) => {
+const init = (tag) => {
 
     let element;
     try{
@@ -32,7 +32,7 @@ export default const init = (tag) => {
     return element;
 }
 
-export default const compt = (tagName,attr,...childs) => {
+const compt = (tagName,attr,...childs) => {
     return{
         tagName,
         attr:{
@@ -42,7 +42,7 @@ export default const compt = (tagName,attr,...childs) => {
 
     }
 }
-export default const create = (compt) =>{
+ const create = (compt) =>{
     let result = document.createElement(compt.tagName);
     for(const name in compt.attr){
         result.setAttribute(name, compt.attr[name]);
@@ -66,7 +66,7 @@ export default const create = (compt) =>{
     }
     return result;
 }
-export default const div = (attr,...children) => {
+ const div = (attr,...children) => {
     return create(compt("div",attr,...children));
 }
 const a = (attr,...children) => {
@@ -118,3 +118,5 @@ const nav = (attr,...children) => {
 const text = (txt) => {
     return document.createTextNode(txt);
 }
+
+export { init,div, create, compt}
