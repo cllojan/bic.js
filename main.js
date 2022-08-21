@@ -1,4 +1,4 @@
-const init = (tag) => {
+export const init = (tag) => {
 
     let element;
     try{
