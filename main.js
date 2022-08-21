@@ -1,4 +1,5 @@
-const init = (tag) => {
+export default const init = (tag) => {
+
     let element;
     try{
         let tags = ["#","."];
@@ -31,7 +32,7 @@ const init = (tag) => {
     return element;
 }
 
-const compt = (tagName,attr,...childs) => {
+export default const compt = (tagName,attr,...childs) => {
     return{
         tagName,
         attr:{
@@ -41,7 +42,7 @@ const compt = (tagName,attr,...childs) => {
 
     }
 }
-const create = (compt) =>{
+export default const create = (compt) =>{
     let result = document.createElement(compt.tagName);
     for(const name in compt.attr){
         result.setAttribute(name, compt.attr[name]);
@@ -65,7 +66,7 @@ const create = (compt) =>{
     }
     return result;
 }
-const div = (attr,...children) => {
+export default const div = (attr,...children) => {
     return create(compt("div",attr,...children));
 }
 const a = (attr,...children) => {
