@@ -119,4 +119,4 @@ const text = (txt) => {
     return document.createTextNode(txt);
 }
 
-module.export = {init, copmt , create, div  }
+module.exports = {init, copmt , create, div  }
