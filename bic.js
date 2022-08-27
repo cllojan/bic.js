@@ -73,27 +73,7 @@ const a = (attr,...children) => {
 
     return create(compt("a",attr,...children));
 }
-const p = (attr,...children) => {
-    return create(compt("p",attr,...children));
-}
-const h1 = (attr,...children) => {
-    return create(compt("h1",attr,...children));
-}
-const h2 = (attr,...children) => {
-    return create(compt("h2",attr,...children));
-}
-const h3 = (attr,...children) => {
-    return create(compt("h3",attr,...children));
-}
-const h4 = (attr,...children) => {
-    return create(compt("h4",attr,...children));
-}
-const h5 = (attr,...children) => {
-    return create(compt("h5",attr,...children));
-}
-const h6 = (attr,...children) => {
-    return create(compt("h6",attr,...children));
-}
+
 const span = (attr,...children) => {
     return create(compt("span",attr,...children));
 }
