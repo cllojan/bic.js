@@ -50,7 +50,7 @@ const compt = (tagName,attr,...childs) => {
     }
 
     for(const child of compt.childs){
-
+        console.log(child)
         result.appendChild(child);
     }
 
@@ -95,8 +95,18 @@ const li = (attr,...children) => {
 const nav = (attr,...children) => {
     return create(compt("nav",attr,...children));
 }
-const text = (txt) => {
-    return document.createTextNode(txt);
+const text = (attr,...children) => {
+    let att = ['class','id','style']
+    return create(compt("p",attr,...children));
 }
 
-export default init;
+const Flex = (attr,...children) => {
+    let style = {
+        'display':'flex',
+    }
+    return create(compt("div",attr,...children)).styles(style)
+}
+
+//init("app").Childs(div({"class":"owo"},text({type:"s",attr:{"class":"owo"}},text("owo"))))
+
+console.log(text({"class":"ow"}));
