@@ -1,3 +1,23 @@
+import {StyleCSS} from './Styles.js';
+const loadFont = () => {
+    
+    //<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
+    var link = document.createElement("link");
+    var link2 = document.createElement("link");
+    var styleH = document.createElement("link");
+    link.rel = "preconnect"
+    link.href = "https://fonts.googleapis.com"
+    document.head.appendChild(link);
+    link2.rel = "preconnect"
+    link2.href = "https://fonts.gstatic.com"
+    link2.crossOrigin="";
+    document.head.appendChild(link2);
+    styleH.rel="stylesheet";
+    styleH.href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400;1,700;1,900&display=swap";
+    document.head.appendChild(styleH);
+    document.body.style.fontFamily='Roboto,sans-serif';
+}
+loadFont();
 const init = (tag) => {
 
     let element;
@@ -36,28 +56,39 @@ const compt = (tagName,attr,...childs) => {
     return{
         tagName,
         attr:{
-            ...attr,
+           ...attr
         },
         childs,
 
     }
 }
- const create = (compt) =>{
+
+const create = (compt) =>{
     let result = document.createElement(compt.tagName);
+    let befStyles="";
     for(const name in compt.attr){
+  
         result.setAttribute(name, compt.attr[name]);
 
     }
-
-    for(const child of compt.childs){
-        console.log(child)
+    for(const child of compt.childs){   
+        
         result.appendChild(child);
     }
-
     result.styles = (styles) =>{
-        for(const key in styles){
-            result.style[key] = styles[key];
+       
+        befStyles+=styles;
+        console.log(befStyles)
+        if(compt.attr.id != undefined){ 
+                   
+            StyleCSS(`#${compt.attr.id}`,befStyles);
+            return result
+        }   
+        if(compt.attr.class != undefined){
+            StyleCSS("."+compt.attr.class);
+            return result;
         }
+        
         return result;
     }
     result.onclick = (callback) => {
@@ -95,18 +126,55 @@ const li = (attr,...children) => {
 const nav = (attr,...children) => {
     return create(compt("nav",attr,...children));
 }
-const text = (attr,...children) => {
-    let att = ['class','id','style']
-    return create(compt("p",attr,...children));
+/*
+const text = (attr,txt) => {
+    
+    return create(compt("p",attr,document.createTextNode(txt)));
+}*/
+const text = (attrs,txt)=>{
+    return create(compt('h1',
+    {
+        id:attrs.id,
+        class:attrs.class,
+        ...attrs
+    },document.createTextNode(txt))).styles(attrs.style)
+} 
+let style = {
+    texto:`
+        color:red;
+    `,
+    components:`
+        height:"100vh",
+        background-color:"blue",    
+        justify-ontent:'center',
+    `
 }
 
-const Flex = (attr,...children) => {
-    let style = {
-        'display':'flex',
+let ok = {
+    owo:`        
+        color:red;
+        text-transform: uppercase;
+    `
+}
+JSON.stringify(ok.owo)
+const Flex = (attrs,...children) => {
+    let styless = {
+        Flex:`
+            display:flex;
+            background: blue;
+            width:100vw;            
+            height:100vh;
+        
+        `
     }
-    return create(compt("div",attr,...children)).styles(style)
+    return create(compt("div",{
+        id:attrs.id,
+        class:attrs.class,
+        
+        ...attrs
+    },...children)).styles(styless.Flex);
 }
 
-//init("app").Childs(div({"class":"owo"},text({type:"s",attr:{"class":"owo"}},text("owo"))))
+init("app").Childs(Flex({id:"owo",class:"uwu",style:ok.owo},text({class:"text"},"hola")));
 
-console.log(text({"class":"ow"}));
+

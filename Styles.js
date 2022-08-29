@@ -1,24 +1,12 @@
 
-const style = (style) =>{
-    return style;
+export  function StyleCSS(elm,styles){
+    
+    const sheet = new CSSStyleSheet();
+    sheet.insertRule(`${elm}{
+     ${styles}
+    }`);    
+   
+    document.adoptedStyleSheets = [sheet];
+   
+    
 }
-const attr= (attr) => {
-    return attr;
-}
-let xd = style({
-    xd:{
-        backgroundColor:"#000",
-        color:"#fff",
-        fontSize:12,
-    },
-    ow:{
-        oo:"s",
-    }
-});
-
-console.log(xd.xd)
-
-console.log(attr({
-    class:"d",
-    id:'owo'
-}))
