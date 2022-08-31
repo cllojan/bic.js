@@ -50,7 +50,10 @@ export const Link = ({id,className,styles,...attrs}={},...children) => {
     let args = {id:id,
                 class:className,
                 ...attrs}
-    return create(compt("a",args,...retString));
+    return create(compt("a",args,...retString)).onclick((e) =>{
+        e.preventDefault();
+        console.log("uwuw", e);
+    });
 
 }
 

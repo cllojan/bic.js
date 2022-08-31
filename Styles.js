@@ -13,3 +13,12 @@ export  function StyleCSS(elm,styles){
 
     
 }
+
+export const urlRoute = (event) => {
+    event = event || window.event;
+    event.preventDefault();
+    window.history.pushState({},"",event.target.href)
+}
+export const urlLocationHandler = async () => {
+
+}

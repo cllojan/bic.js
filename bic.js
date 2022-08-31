@@ -19,25 +19,17 @@ const loadFont = () => {
 }
 loadFont();
 export const init = (tag) => {
-
     let element;
     try{
-        let tags = ["#","."];
-        for(let elm of tags){
-            if(document.querySelector(elm+tag)){
-                element = document.querySelector(elm+tag);
-            }
-        }
-
+        element = document.querySelector(tag);
+        StyleCSS("*","margin:0;padding:0;box-sizing:border-box;")
     }catch(e){
         console.log(e);
     }
 
     element.styles = (styles) =>{
-        for(const key in styles){
-            element.style[key] = styles[key];
-        }
-        return element;
+        StyleCSS(tag,styles);
+
     }
     element.html = (html) =>{
         return this.innerHTML = html;
@@ -46,7 +38,6 @@ export const init = (tag) => {
         for(let child of childs){
             element.appendChild(child);
         }
-
     }
     return element;
 }
