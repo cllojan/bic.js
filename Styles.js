@@ -1,13 +1,15 @@
-
+const sheet = new CSSStyleSheet();
 export  function StyleCSS(elm,styles){
+    if(styles){
 
-
-    const sheet = new CSSStyleSheet();
-    sheet.insertRule(`${elm}{
+        sheet.insertRule(`${elm}{
      ${styles}
-    }`);    
-   
-    document.adoptedStyleSheets = [sheet];
-   
+    }`);
+
+        document.adoptedStyleSheets = [sheet];
+
+    }
+
+
     
 }

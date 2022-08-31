@@ -1,29 +1,34 @@
 import {create,compt} from './bic.js';
 import { StyleCSS } from './Styles.js';
 
-export const Flex = (attrs,...children) => {
+export const Flex = ({id,className,styles,...attrs}={},...children) => {
     let styless = {
         Flex:`
             display:flex;
         `
     }
-    //stylesDef(id,sty);
-    return create(compt("div",{
-        id:attrs.id,
-        class:attrs.class,
-        style:attrs.styles,
-        ...attrs
-    },...children));
-}
-export const Text = ({id,className,sty,...attrs}={},txt)=>{
+
     if(id && className){
-        StyleCSS("#"+id,sty);
+        StyleCSS("#"+id,styles);
     }else if(className){
-        StyleCSS("."+className,sty);
-    }else{
-        StyleCSS("#"+id,sty);
+        StyleCSS("."+className,styles);
+    }else if(id){
+        StyleCSS("#"+id,styles);
     }
 
+    let args = {id:id,
+                class:className,
+                ...attrs}
+    return create(compt("div",args,...children));
+}
+export const Text = ({id,className,styles,...attrs}={},txt)=>{
+    if(id && className){
+        StyleCSS("#"+id,styles);
+    }else if(className){
+        StyleCSS("."+className,styles);
+    }else{
+        StyleCSS("#"+id,styles);
+    }
 
     let args = {id:id,
                 class:className,
@@ -32,9 +37,20 @@ export const Text = ({id,className,sty,...attrs}={},txt)=>{
 }
 
 
-export const Link = (attr,...children) => {
+export const Link = ({id,className,styles,...attrs}={},...children) => {
     let retString = children.map(x => typeof x == "string" ? document.createTextNode(x) : x);
-    return create(compt("a",attr,...retString));
+    if(id && className){
+        StyleCSS("#"+id,styles);
+    }else if(className){
+        StyleCSS("."+className,styles);
+    }else{
+        StyleCSS("#"+id,styles);
+    }
+
+    let args = {id:id,
+                class:className,
+                ...attrs}
+    return create(compt("a",args,...retString));
 
 }
 
