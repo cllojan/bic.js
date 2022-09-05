@@ -1,4 +1,4 @@
-import {create,compt} from './bic.js';
+import {create,compt,changePage} from './bic.js';
 import { StyleCSS } from './Styles.js';
 
 export const Flex = ({id,className,styles,...attrs}={},...children) => {
@@ -50,10 +50,7 @@ export const Link = ({id,className,styles,...attrs}={},...children) => {
     let args = {id:id,
                 class:className,
                 ...attrs}
-    return create(compt("a",args,...retString)).onclick((e) =>{
-        e.preventDefault();
-        console.log("uwuw", e);
-    });
+    return create(compt("a",args,...retString)).onclick(e=>changePage(e));
 
 }
 

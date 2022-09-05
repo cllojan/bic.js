@@ -1,4 +1,11 @@
 import {StyleCSS} from './Styles.js';
+let rutaAct = window.location.pathname.slice(1);
+let dinRoute = {
+    rutaAct:{
+	path:"/",
+	template:"s",
+    }
+}   
 const loadFont = () => {
 
     //<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
@@ -52,7 +59,6 @@ export const compt = (tagName,attr,...childs) => {
 
     }
 }
-
 export const create = (compt) =>{
     let result = document.createElement(compt.tagName);
     let befStyles="";
@@ -60,8 +66,6 @@ export const create = (compt) =>{
         if(compt.attr[name]){
             result.setAttribute(name, compt.attr[name]);
         }
-
-
     }
     for(const child of compt.childs){
 
@@ -73,3 +77,44 @@ export const create = (compt) =>{
     }
     return result;
 }
+
+
+export function changePage(event){
+    event = event || window.event;
+    event.preventDefault();
+    window.history.pushState({},"",event.target.href);
+    rutaAct = window.location.pathname.slice(1);
+    Router();
+}
+export const Route = (...children) => {
+
+    for(const elm of children){
+	dinRoute[elm.name] = {
+	    path: `/${elm.name}`,
+	    template:elm()
+	}
+    }
+
+}
+
+export const Router = (object) => {
+    let result;
+    let location = window.location.pathname;
+    if(!location){
+	location = "/";
+    }
+    if(!(location in object)){
+	const notFound = '/404';
+	console.log("no encontrado")
+    }
+}
+/*
+
+  Router() pasa objeto como parametro en el changePAge se ejecutar nuevamente y obtiene el objeto guardao en memoria de ejecucion
+  Crear un detector de cambios dentrode app.js
+*/
+window.onpopstate = Router;
+window.route = changePage;
+
+Router();
+
