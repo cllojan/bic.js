@@ -50,7 +50,11 @@ export const Link = ({id,className,styles,...attrs}={},...children) => {
     let args = {id:id,
                 class:className,
                 ...attrs}
+<<<<<<< HEAD
     return create(compt("a",args,...retString)).onclick(e=>changePage(e));
+=======
+    return create(compt("a",args,...retString));
+>>>>>>> 7ba08d94f8da9e97609b68bb0de14e64bd250d35
 
 }
 
