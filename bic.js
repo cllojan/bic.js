@@ -84,7 +84,7 @@ export function changePage(event){
     event.preventDefault();
     window.history.pushState({},"",event.target.href);
     rutaAct = window.location.pathname.slice(1);
-    Router();
+    Router(dinRoute);
 }
 export const Route = (...children) => {
 
@@ -94,18 +94,14 @@ export const Route = (...children) => {
 	    template:elm()
 	}
     }
-
+    return dinRoute;
 }
 
 export const Router = (object) => {
     let result;
-    let location = window.location.pathname;
-    if(!location){
-	location = "/";
-    }
-    if(!(location in object)){
-	const notFound = '/404';
-	console.log("no encontrado")
+    let elm = document.getElementByID("container");
+    if(object){
+	console.log(object)
     }
 }
 /*
