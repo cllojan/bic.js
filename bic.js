@@ -1,10 +1,6 @@
 import {StyleCSS} from './Styles.js';
-let rutaAct = window.location.pathname.slice(1);
+let rutaAct = window.location.pathname;
 let dinRoute = {
-    rutaAct:{
-	path:"/",
-	template:"s",
-    }
 }   
 const loadFont = () => {
 
@@ -83,13 +79,13 @@ export function changePage(event){
     event = event || window.event;
     event.preventDefault();
     window.history.pushState({},"",event.target.href);
-    rutaAct = window.location.pathname.slice(1);
+    rutaAct = window.location.pathname;
     Router(dinRoute);
 }
 export const Route = (...children) => {
 
     for(const elm of children){
-	dinRoute[elm.name] = {
+	dinRoute["/"+elm.name] = {
 	    path: `/${elm.name}`,
 	    template:elm()
 	}
@@ -98,10 +94,20 @@ export const Route = (...children) => {
 }
 
 export const Router = (object) => {
-    let result;
-    let elm = document.getElementByID("container");
+
+    let elm = document.getElementById("container");
     if(object){
-	console.log(object)
+
+	if(!object[rutaAct]){
+
+	    elm.appendChild(object["/NotFound"].template)
+	}else{
+	    if(elm.firstChild){
+		elm.removeChild(elm.lastChild); 
+	    }
+	    elm.appendChild(object[rutaAct].template);
+	}
+
     }
 }
 /*
